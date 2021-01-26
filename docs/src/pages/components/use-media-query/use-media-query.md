@@ -166,9 +166,11 @@ You can reproduce the same behavior with a `useWidth` hook:
   we return a default matches during the first mount. The default value is `false`.
   - `options.matchMedia` (*Function* [optional]) You can provide your own implementation of *matchMedia*. This can be used for handling an iframe content window.
   - `options.noSsr` (*Boolean* [optional]): Defaults to `false`.
-  In order to perform the server-side rendering reconciliation, it needs to render twice.
-  A first time with nothing and a second time with the children.
-  This double pass rendering cycle comes with a drawback. It's slower.
+  In order to perform the server-side rendering reconciliation, a component using this hook needs to be rendered twice.
+  The hook returns a tentative value first (`defaultMatches` or the result of `ssrMatchMedia`),
+  and returns the actual value right after that.
+  This double pass rendering cycle makes a rendering slower but is necessary to work with the
+  server-side rendering.
   You can set this flag to `true` if you are **not doing server-side rendering**.
   - `options.ssrMatchMedia` (*Function* [optional]) You can provide your own implementation of *matchMedia* in a [server-side rendering context](#server-side-rendering).
 
